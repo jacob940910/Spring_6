@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns="http://www.springframework.org/schema/mvc"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:beans="http://www.springframework.org/schema/beans"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+	<!-- 제공되는 이 파일의 경우에는 mvc: 은 생략하고 설정가능합니다.
+	bean 이나 property를 설정할 때 앞에 beans: 을 붙여야 합니다.
+	 -->
+	
+	<!-- URL 패턴에 해당하는 곳에서만 사용할 bean을 생성 -->
+	
+	<!-- Spring MVC 프로젝트의 50여 가지 설정을 해주는 태그 -->
+	<annotation-driven />
+
+	<!-- 여기 설정된 디렉토리에 존재하는 리소스를 사용할 때는 
+	캐싱을 해주는 설정
+	정적인 자원(변하지 않는 자원)은 여기 설정된 디렉토리에 
+	추가하는 것이 좋습니다. -->
+	<resources mapping="/resources/**" location="/resources/" />
+
+	<!-- Controller에서 리턴한 뷰 이름을 가지고 조합해서 실제 출력할
+	뷰를 결정하는 설정
+	redirect 하는 경우와 절대경로를 사용하는 경우에는
+	이 설정을 적용하지 않습니다. -->
+	<beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<beans:property name="prefix" value="/WEB-INF/views/" />
+		<beans:property name="suffix" value=".jsp" />
+	</beans:bean>
+	
+	<!-- bean을 자동생성해주는 패키지를 설정 -->
+	<context:component-scan base-package="com.pk.mvc0919" />
+
+	<!-- Controller가 처리하지 못하는 경우에는 
+	WAS가 처리하도록 하는 설정
+	스타일시트, 자바스크립트, 리소스 등을 프로젝트안에 저장하고 
+	사용하는 경우에 필수
+	이 설정을 하지 않으면 리소드 등을 요구할 때 Controller가 
+	처리하고 없으면 404 에러 메시지를 출력합니다. -->
+	<default-servlet-handler/>
+
+</beans:beans>
+
+
+
+
+
